@@ -1,0 +1,48 @@
+<quiz>
+	<question number="1" type="multiple_choice" mandatory="true">
+		<text>What is the chemical symbol for water?</text>
+		<answers>
+			<answer points="3">O</answer>
+			<answer points="8">H2O</answer>
+			<answer points="4">H</answer>
+			<answer points="5">H2</answer>
+		</answers>
+	</question>
+	<question number="3" type="open_ended" mandatory="true">
+		<text>Explain the Pythagorean theorem.</text>
+	</question>
+	<question number="4" type="multiple_choice" mandatory="false">
+		<text>Which planet is known as the Red Planet?</text>
+		<answers>
+			<answer points="5">Mars</answer>
+			<answer points="2">Mercury</answer>
+			<answer points="3">Venus</answer>
+			<answer points="4">Jupiter</answer>
+		</answers>
+	</question>
+	<question number="5" type="open_ended" mandatory="false">
+		<text>What are the primary colors?</text>
+	</question>
+	<question number="6" type="multiple_select" mandatory="true">
+		<text>Which of the following are fruits?</text>
+		<answers>
+			<answer points="7">Apple</answer>
+			<answer points="6">Banana</answer>
+			<answer points="2">Orange</answer>
+			<answer points="5">Grapes</answer>
+			<answer points="4">Strawberry</answer>
+		</answers>
+	</question>
+	<question number="7" type="multiple_select" mandatory="false">
+		<text>Which of the following are mammals?</text>
+		<answers>
+			<answer points="8">Dog</answer>
+			<answer points="1">Cat</answer>
+			<answer points="9">Elephant</answer>
+			<answer points="4">Dolphin</answer>
+			<answer points="3">Tiger</answer>
+			<answer points="2">Giraffe</answer>
+		</answers>
+	</question>
+</quiz>
+

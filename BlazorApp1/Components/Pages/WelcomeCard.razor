@@ -1,0 +1,23 @@
+﻿@using BlazorApp1.Data;
+@page "/welcome"
+@inject NavigationManager NavigationManager
+
+
+<PageTitle>Welcome</PageTitle>
+<div class="greeting_container">
+    <p style="margin-bottom: 1%;">
+        Welcome! <br />
+       This Quiz is designed to test your general knowledge about various topics.It includes 3 types of questions:</p>
+    <div style="text-align:left; margin-left:31%; margin-bottom: 1%;">
+            -Multiple choice<br />
+            -Open ended questions<br />
+            -Multiple selection questions<br />
+
+             Some are skippable,while others are mandatory.<br />
+        </div>
+    <p>At the end you will be given a score based on your answers!</p> 
+
+    <button class="btn btn-primary" @onclick="MethodToTriggerUrl">Start</button>
+</div>
+
+

@@ -1,0 +1,98 @@
+﻿@using System
+@using System.Collections.Generic
+@using System.Xml.Linq
+@using BlazorApp1.Data
+@using BlazorApp1.Services
+@inject NavigationManager NavigationManager
+@inject QuestionService QuestionService
+
+@page "/questions"
+
+
+
+<PageTitle>Question @(currentQuestionIndex+1) / @questions.Count </PageTitle>
+
+<Modal @ref="modal" title="Mandatory Question" UseStaticBackdrop="true" IsVerticallyCentered="true" CloseOnEscape="false">
+    <BodyTemplate>
+       You have to answer this question before moving on to the next!
+    </BodyTemplate>
+    <FooterTemplate>
+        <Button Color="ButtonColor.Secondary" @onclick="OnHideModalClick">Close</Button>
+        
+    </FooterTemplate>
+</Modal>
+
+    <Progress class="mb-3 ">
+    <ProgressBar  Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Primary" Width=@(((currentQuestionIndex + 1) * 100)/totalQuestions) Label="@($"{Convert.ToString(((currentQuestionIndex + 1) * 100)/totalQuestions)}%")" />
+    </Progress>
+
+    
+   
+<div class="question_container">
+    @if (questions != null && questions.Any())
+    {
+        @if (currentQuestionIndex < questions.Count)
+        {
+            <p>@questions[currentQuestionIndex].Text</p>
+            @if (questions[currentQuestionIndex].Type == "multiple_choice")
+            {
+                <div class="buttons">   
+                    @foreach (var answer in questions[currentQuestionIndex].Answers)
+                    {
+                        var tempAnswer = answer;
+                        <div class="combo">
+                        <input type="radio" id="@answer.Answer" name="question_@questions[currentQuestionIndex].Number" @bind="@tempAnswer.IsSelected" @onclick="() => { questions[currentQuestionIndex].SelectedPoints = answer.Points; questions[currentQuestionIndex].Answered = true; }">
+                        <label for="@answer.Answer"> @answer.Answer</label>
+                        </div>
+                        <br/>
+                    }
+                </div>
+            }
+            else if (questions[currentQuestionIndex].Type == "open_ended")
+            {
+                <textarea id="w3review" name="w3review"  placeholder="Type your answer here..." rows="4" cols="50" @bind="questions[currentQuestionIndex].UserAnswer"></textarea> <br /> <br />
+            }
+
+            else if (questions[currentQuestionIndex].Type == "multiple_select")
+            {
+                <div class="buttons">
+                    @foreach (var answer in questions[currentQuestionIndex].Answers)
+                    {
+                        var tempAnswer = answer;
+                        <div class="combo">
+                            <input type="checkbox" id="@tempAnswer.Answer" name="question_@questions[currentQuestionIndex].Number"  @onclick="() => UpdateSelectedAnswers(tempAnswer)">
+                        <label for="@tempAnswer.Answer">@tempAnswer.Answer</label>
+                        </div>
+                        <br />
+                    }
+                </div>
+               @*  <div class="buttons">
+                    @foreach (var answer in questions[currentQuestionIndex].Answers)
+                    {
+                        var tempAnswer = answer;
+                        <div class="combo">
+                            <input type="checkbox" id="@tempAnswer.Answer" name="question_@questions[currentQuestionIndex].Number" @onclick="() => tempAnswer.IsSelected = !tempAnswer.IsSelected">
+                            <label for="@tempAnswer.Answer">@tempAnswer.Answer</label>
+                        </div>
+                        <br />
+                    }
+                </div> *@
+
+
+
+            }
+        }
+       
+    }
+    <button class="btn btn-primary" @onclick="Previous" disabled="@IsFirstQuestion">Previous</button>
+    <button class="btn btn-success" @onclick="Next" >Next</button>
+
+ @*    @if (IsLastQuestion)
+        {
+        <button class="btn btn-success" @onclick="MethodToTriggerUrl" >Done</button>
+        } *@
+
+</div>
+
+
+
